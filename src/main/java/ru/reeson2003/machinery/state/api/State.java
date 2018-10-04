@@ -9,7 +9,6 @@ public interface State<S, A extends Action<?>> {
 
     void perform(A action);
 
-    void listen(StateListener<S> listener);
+    Subscription<S> listen(StateListener<S> listener);
 
-    void stopListen(StateListener<S> listener);
 }

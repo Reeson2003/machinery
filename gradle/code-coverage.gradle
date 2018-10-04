@@ -1,0 +1,56 @@
+clover {
+    targetPercentage = '85%'
+
+    contexts {
+        statement {
+            name = 'log'
+            regexp = 'log\\..+'
+        }
+        method {
+            name = 'main'
+            regexp = '(.* )?public static void main\\(String.+\\)'
+        }
+        method {
+            name = 'constructors'
+            regexp = '(.* )?(public|protected|private) \\S+\\(.*\\)'
+            maxComplexity = 1
+        }
+        method {
+            name = 'getters'
+            regexp = '(.* )?public \\S+ (get|is)[A-Z]\\S+\\(\\)'
+            maxStatements = 1
+        }
+        method {
+            name = 'setters'
+            regexp = '(.* )?public void set[A-Z]\\S+\\(.+\\)'
+            maxStatements = 1
+        }
+        method {
+            name = 'toString'
+            regexp = '(.* )?public String toString\\(\\)'
+            maxComplexity = 3
+        }
+        method {
+            name = 'equals'
+            regexp = '(.* )?public boolean equals\\(.+\\)'
+        }
+        method {
+            name = 'hashCode'
+            regexp = '(.* )?public int hashCode\\(\\)'
+        }
+    }
+
+    report {
+        html = true
+        pdf = true
+        filter = 'log,main,constructors,getters,setters,toString,equals,hashCode'
+
+        // Clover report nested columns support
+        columns {
+            coveredMethods format: 'longbar', min: '75'
+            coveredStatements format: '%'
+            coveredBranches format: 'raw'
+            totalPercentageCovered format: '%', scope: 'package'
+        }
+    }
+}

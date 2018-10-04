@@ -26,13 +26,13 @@ class StateImpl<S, A extends Action<?>>
     }
 
     @Override
-    public void listen(StateListener<S> listener) {
+    public Subscription<S> listen(StateListener<S> listener) {
         listeners.add(listener);
-    }
-
-    @Override
-    public void stopListen(StateListener<S> listener) {
-        listeners.remove(listener);
+        listener.update(state);
+        return () -> {
+            listeners.remove(listener);
+            return listener;
+        };
     }
 
 }

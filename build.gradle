@@ -1,16 +1,30 @@
+buildscript {
+    ext {
+        lombokVersion = '1.18.0'
+    }
+}
+
 plugins {
     id 'java'
+    id 'com.bmuschko.clover' version '2.2.1'
+    id 'java-library'
+    id 'idea'
 }
+
+apply from: "$project.rootDir/gradle/code-coverage.gradle"
+apply from: "$project.rootDir/gradle/integration-test.gradle"
+apply from: "$project.rootDir/gradle/artifacts.gradle"
 
 group 'ru.reeson2003'
 version '1.0.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "org.projectlombok:lombok:${lombokVersion}"
+    
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    clover 'org.openclover:clover:4.2.0'
 }
