@@ -9,7 +9,7 @@ public class StateTest {
 
     @Test
     public void createTest() {
-        State<String, Action<?>> test = State.create("TEST", (s, a) -> s);
+        State<String, Action<?, ?>> test = State.create("TEST", (s, a) -> s);
         assertThat(test, notNullValue());
     }
 }

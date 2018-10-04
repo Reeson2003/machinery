@@ -1,8 +1,8 @@
 package ru.reeson2003.machinery.state.api;
 
-public interface Action<P> {
+public interface Action<I, P> {
 
-    String getName();
+    I getIdentity();
 
     P getPayload();
 }

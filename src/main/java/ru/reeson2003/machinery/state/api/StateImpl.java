@@ -3,7 +3,7 @@ package ru.reeson2003.machinery.state.api;
 import java.util.ArrayList;
 import java.util.List;
 
-class StateImpl<S, A extends Action<?>>
+class StateImpl<S, A extends Action<?, ?>>
         implements State<S, A> {
 
     private S state;
