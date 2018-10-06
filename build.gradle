@@ -1,9 +1,13 @@
 buildscript {
     ext {
         lombokVersion = '1.18.0'
+        myRepo = {
+            url 'https://dl.bintray.com/reeson2003/maven/'
+        }
     }
     repositories {
         jcenter()
+        maven myRepo
     }
 }
 
