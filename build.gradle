@@ -11,8 +11,7 @@ plugins {
     id 'java-library'
     id 'idea'
     id 'com.bmuschko.clover' version '2.2.1'
-    id 'com.jfrog.bintray' version '1.7'
-//todo: https://github.com/bintray/gradle-bintray-plugin
+    id 'com.jfrog.bintray' version '1.8.4'
 }
 
 apply from: "$project.rootDir/gradle/code-coverage.gradle"
@@ -23,7 +22,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'java'
 
 group = 'ru.reeson2003'
-version ='1.0.0-SNAPSHOT'
+version ='1.0.0'
 
 dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -47,12 +46,13 @@ publishing {
 }
 
 bintray {
-    user = 'xxxxxxx'
-    key = 'xxxxxxxx'
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
     publications = ['mavenPublication']
     publish = true
     pkg {
         repo = 'maven'
+        name = project.name
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/Reeson2003/machinery.git'
         version {
