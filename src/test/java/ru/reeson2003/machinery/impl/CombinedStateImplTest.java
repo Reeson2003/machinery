@@ -1,10 +1,10 @@
-package ru.reeson2003.machinery.state.impl;
+package ru.reeson2003.machinery.impl;
 
 import lombok.Data;
 import org.junit.Test;
-import ru.reeson2003.machinery.state.api.Action;
-import ru.reeson2003.machinery.state.api.CombinedState;
-import ru.reeson2003.machinery.state.api.State;
+import ru.reeson2003.machinery.api.Action;
+import ru.reeson2003.machinery.api.CombinedState;
+import ru.reeson2003.machinery.api.State;
 
 import java.util.Date;
 
@@ -13,12 +13,6 @@ public class CombinedStateImplTest {
     @Test
     public void combineTest() {
         CombinedState combinedState = prepare();
-
-        combinedState.listen(System.out::println, One.class);
-        combinedState.listen(System.out::println, Two.class);
-
-        combinedState.perform(new OneAction(Key.SUCCESS, "text - 42"), One.class);
-        combinedState.perform(new TwoAction(Key.SUCCESS, 43), Two.class);
     }
 
     private CombinedState prepare() {

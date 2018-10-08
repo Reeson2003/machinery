@@ -1,6 +1,6 @@
-package ru.reeson2003.machinery.state.api;
+package ru.reeson2003.machinery.api;
 
-import ru.reeson2003.machinery.state.impl.StateImpl;
+import ru.reeson2003.machinery.impl.StateImpl;
 
 public interface State<S, A extends Action<?, ?>> {
 
@@ -12,5 +12,4 @@ public interface State<S, A extends Action<?, ?>> {
     void perform(A action);
 
     Subscription<S> listen(StateListener<S> listener);
-
 }

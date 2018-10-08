@@ -1,4 +1,4 @@
-package ru.reeson2003.machinery.state.api;
+package ru.reeson2003.machinery.api;
 
 import org.junit.Test;
 

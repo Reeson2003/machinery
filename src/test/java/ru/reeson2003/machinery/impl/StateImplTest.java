@@ -1,9 +1,9 @@
-package ru.reeson2003.machinery.state.impl;
+package ru.reeson2003.machinery.impl;
 
 import org.junit.Test;
-import ru.reeson2003.machinery.state.api.Action;
-import ru.reeson2003.machinery.state.api.StateListener;
-import ru.reeson2003.machinery.state.api.Subscription;
+import ru.reeson2003.machinery.api.Action;
+import ru.reeson2003.machinery.api.StateListener;
+import ru.reeson2003.machinery.api.Subscription;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

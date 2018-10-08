@@ -1,6 +1,6 @@
-package ru.reeson2003.machinery.state.impl;
+package ru.reeson2003.machinery.impl;
 
-import ru.reeson2003.machinery.state.api.*;
+import ru.reeson2003.machinery.api.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
