@@ -1,7 +1,10 @@
-package ru.reeson2003.machinery.state.api;
+package ru.reeson2003.machinery.state.impl;
 
 import lombok.Data;
 import org.junit.Test;
+import ru.reeson2003.machinery.state.api.Action;
+import ru.reeson2003.machinery.state.api.CombinedState;
+import ru.reeson2003.machinery.state.api.State;
 
 import java.util.Date;
 

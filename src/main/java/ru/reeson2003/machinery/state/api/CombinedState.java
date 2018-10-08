@@ -1,5 +1,7 @@
 package ru.reeson2003.machinery.state.api;
 
+import ru.reeson2003.machinery.state.impl.CombinedStateImpl;
+
 public interface CombinedState {
 
     static CombinedState create() {

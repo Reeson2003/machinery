@@ -1,4 +1,6 @@
-package ru.reeson2003.machinery.state.api;
+package ru.reeson2003.machinery.state.impl;
+
+import ru.reeson2003.machinery.state.api.*;
 
 import java.util.HashMap;
 import java.util.Map;

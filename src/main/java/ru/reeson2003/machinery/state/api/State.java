@@ -1,10 +1,12 @@
 package ru.reeson2003.machinery.state.api;
 
+import ru.reeson2003.machinery.state.impl.StateImpl;
+
 public interface State<S, A extends Action<?, ?>> {
 
+    @SuppressWarnings("unchecked")
     static <M, P extends Action<?, ?>> State<M, P> create(M initialState, Dispatcher<M, P> dispatcher) {
-        StateImpl<M, P> stateImpl = new StateImpl(initialState, dispatcher);
-        return stateImpl;
+        return (StateImpl<M, P>) new StateImpl(initialState, dispatcher);
     }
 
     void perform(A action);
