@@ -1,5 +1,7 @@
 package ru.reeson2003.machinery.state.api;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +15,21 @@ class StateImpl<S, A extends Action<?, ?>>
     private List<StateListener<S>> listeners = new ArrayList<>();
 
     StateImpl(S state, Dispatcher<S, A> dispatcher) {
+        checkFinality(state);
         this.state = state;
         this.dispatcher = dispatcher;
     }
 
+    private void checkFinality(S state) {
+        Field[] fields = state.getClass().getFields();
+        for (int i = 0; i < fields.length; i++) {
+            int modifiers = fields[i].getModifiers();
+            boolean isFinal = Modifier.isFinal(modifiers);
+            if (!isFinal) {
+                throw new IllegalArgumentException("All fields of model class should be final");
+            }
+        }
+    }
 
     @Override
     public void perform(A action) {
