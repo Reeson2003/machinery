@@ -31,6 +31,11 @@ public class SampleView
     }
 
     @Override
+    public void onOpen() {
+        getPresenter().connect();
+    }
+
+    @Override
     public void onMessage(String text) {
         getPresenter().setData(text);
     }
@@ -42,6 +47,6 @@ public class SampleView
 
     @Override
     public void onClose(CloseStatus status) {
-
+        getPresenter().disconnect();
     }
 }

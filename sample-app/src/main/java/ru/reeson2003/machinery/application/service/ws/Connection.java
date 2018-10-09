@@ -4,6 +4,8 @@ import org.springframework.web.socket.CloseStatus;
 
 public interface Connection {
 
+    void onOpen();
+
     void onMessage(String text);
 
     void onError(Throwable exception);

@@ -12,6 +12,6 @@ public class SampleAction
     private final SamplePayload payload;
 
     public enum Result {
-        DATA, ID
+        MESSAGE, CONNECT, DISCONNECT
     }
 }

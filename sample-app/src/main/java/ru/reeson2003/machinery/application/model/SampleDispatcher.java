@@ -2,7 +2,7 @@ package ru.reeson2003.machinery.application.model;
 
 import ru.reeson2003.machinery.api.Dispatcher;
 
-import java.util.Date;
+import java.util.List;
 
 public class SampleDispatcher
         implements Dispatcher<SampleModel, SampleAction> {
@@ -10,10 +10,15 @@ public class SampleDispatcher
     @Override
     public SampleModel dispatch(SampleModel previousState, SampleAction action) {
         switch (action.getIdentity()) {
-            case DATA:
-                return new SampleModel(action.getPayload().getData(), previousState.getId(), new Date());
-            case ID:
-                return new SampleModel(previousState.getData(), action.getPayload().getId(), new Date());
+            case CONNECT:
+                return new SampleModel(previousState.getMessages(), previousState.getUsersOnline() + 1);
+            case DISCONNECT:
+                return new SampleModel(previousState.getMessages(), previousState.getUsersOnline() - 1);
+            case MESSAGE: {
+                List<String> messages = previousState.getMessages();
+                messages.add(action.getPayload().getMessage());
+                new SampleModel(messages, previousState.getUsersOnline());
+            }
             default:
                 return previousState;
         }

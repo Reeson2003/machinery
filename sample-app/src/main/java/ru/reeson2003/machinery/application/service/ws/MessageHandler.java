@@ -29,6 +29,7 @@ public class MessageHandler
     public void afterConnectionEstablished(WebSocketSession session) {
         Connection connection = context.getBean(Connection.class, session);
         connections.put(session, connection);
+        connection.onOpen();
     }
 
     @Override

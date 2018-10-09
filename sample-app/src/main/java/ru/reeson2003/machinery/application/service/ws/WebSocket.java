@@ -28,7 +28,7 @@ public abstract class WebSocket
     protected abstract String context();
 
     @PostConstruct
-    public void updateConfiguration() {
+    public void setup() {
         Optional.ofNullable("10000")
                 .map(Long::parseLong)
                 .ifPresent(timeout -> Optional

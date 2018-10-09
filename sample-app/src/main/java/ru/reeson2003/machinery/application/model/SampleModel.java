@@ -2,14 +2,12 @@ package ru.reeson2003.machinery.application.model;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.util.List;
 
 @Data
 public class SampleModel {
 
-    private final String data;
+    private final List<String> messages;
 
-    private final long id;
-
-    private final Date date;
+    private final long usersOnline;
 }

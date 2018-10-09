@@ -16,14 +16,14 @@ import ru.reeson2003.machinery.application.service.ws.Connection;
 import ru.reeson2003.machinery.application.service.ws.WebSocket;
 import ru.reeson2003.machinery.application.view.SampleView;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 @SpringBootApplication
 @EnableWebSocket
 public class Application {
 
     public static void main(String[] args) {
-        State<SampleModel, SampleAction> state = State.create(new SampleModel("initial data", 0, new Date()), new SampleDispatcher());
+        State<SampleModel, SampleAction> state = State.create(new SampleModel(new ArrayList<>(), 0), new SampleDispatcher());
         CombinedState.combine(state, SampleModel.class);
         SpringApplication.run(Application.class, args);
     }

@@ -11,5 +11,7 @@ public interface SamplePresenter
 
     void setData(String data);
 
-    void setId(long id);
+    void connect();
+
+    void disconnect();
 }

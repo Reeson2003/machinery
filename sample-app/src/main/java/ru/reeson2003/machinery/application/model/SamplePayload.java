@@ -5,7 +5,5 @@ import lombok.Data;
 @Data
 public class SamplePayload {
 
-    private final long id;
-
-    private final String data;
+    private final String message;
 }
