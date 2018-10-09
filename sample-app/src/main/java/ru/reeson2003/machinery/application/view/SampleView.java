@@ -1,5 +1,6 @@
 package ru.reeson2003.machinery.application.view;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -24,7 +25,8 @@ public class SampleView
     @Override
     public void onUpdate(SampleModel model) {
         try {
-            getSession().sendMessage(new TextMessage(model.toString()));
+            String json = new ObjectMapper().writeValueAsString(model);
+            getSession().sendMessage(new TextMessage(json));
         } catch (IOException e) {
             e.printStackTrace();
         }

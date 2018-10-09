@@ -7,8 +7,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
-import javax.websocket.server.ServerContainer;
-import java.util.Optional;
 
 @Slf4j
 public abstract class WebSocket
@@ -29,12 +27,12 @@ public abstract class WebSocket
 
     @PostConstruct
     public void setup() {
-        Optional.ofNullable("10000")
-                .map(Long::parseLong)
-                .ifPresent(timeout -> Optional
-                        .ofNullable(context.getAttribute("javax.websocket.server.ServerContainer"))
-                        .map(obj -> (ServerContainer) obj)
-                        .ifPresent(container -> container.setDefaultMaxSessionIdleTimeout(timeout)));
+        // Optional.ofNullable("10000")
+        //         .map(Long::parseLong)
+        //         .ifPresent(timeout -> Optional
+        //                 .ofNullable(context.getAttribute("javax.websocket.server.ServerContainer"))
+        //                 .map(obj -> (ServerContainer) obj)
+        //                 .ifPresent(container -> container.setDefaultMaxSessionIdleTimeout(timeout)));
     }
 
 }

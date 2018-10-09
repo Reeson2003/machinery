@@ -7,11 +7,12 @@
         const ws = new WebSocket("ws://localhost:8080/ws");
         ws.onopen = () => {
             document.getElementById("messages").innerHTML = "Opened!" + "<br/>" + document.getElementById("messages").innerHTML;
-            // subscribe
-            ws.send("hello");
         };
         ws.onmessage = (evt) => {
-            document.getElementById("messages").innerHTML = "Message: " + evt.data + "<br/>" + document.getElementById("messages").innerHTML;
+            console.log(evt);
+            let parsed = JSON.parse(evt.data);
+            document.getElementById("usersOnline").innerHTML = "Online: " + parsed.usersOnline;
+            document.getElementById("messages").innerHTML = "Messages: " + parsed.messages;
         };
         ws.onclose = () => {
             document.getElementById("messages").innerHTML = "Closed!" + "<br/>" + document.getElementById("messages").innerHTML;
@@ -19,9 +20,17 @@
         ws.onerror = (err) => {
             document.getElementById("messages").innerHTML = "Error: " + err + "<br/>" + document.getElementById("messages").innerHTML;
         };
+        const onSubmit = () => {
+            ws.send(document.getElementById("textInput").value);
+        };
     </script>
 </head>
 <body>
+<div id="usersOnline"></div>
 <div id="messages"></div>
+<div>
+    <input type="text" id="textInput">
+    <input type="button" id="submit" value="OK" onclick="onSubmit()">
+</div>
 </body>
 </html>
