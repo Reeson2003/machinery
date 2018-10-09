@@ -1,2 +1,3 @@
 rootProject.name = 'machinery'
+include 'sample-app'
 
