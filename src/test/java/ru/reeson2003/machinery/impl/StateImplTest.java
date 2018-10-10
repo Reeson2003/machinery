@@ -5,6 +5,8 @@ import ru.reeson2003.machinery.api.Action;
 import ru.reeson2003.machinery.api.StateListener;
 import ru.reeson2003.machinery.api.Subscription;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -13,7 +15,7 @@ public class StateImplTest {
     private String check;
 
     @Test
-    public void performTest() {
+    public void performTest() throws InterruptedException {
         check = "";
         StateImpl<String, MockAction> state = new StateImpl<>("TEST", (s, a) -> {
             switch (a.getIdentity()) {
@@ -31,18 +33,21 @@ public class StateImplTest {
         state.perform(new MockAction(Result.ERROR, "ERROR"));
         assertThat(check, is(""));
         state.perform(new MockAction(Result.SUCCESS, "SUCCESS"));
+        TimeUnit.MILLISECONDS.sleep(100);
         assertThat(check, is("SUCCESS"));
     }
 
     @Test
-    public void listenTest() {
+    public void listenTest() throws InterruptedException {
         check = "";
         StateImpl<String, MockAction> state = new StateImpl<>("TEST", (s, a) -> a.payload);
         Subscription<String> subscription = state.listen(s -> check = s);
         state.perform(new MockAction(Result.SUCCESS, "ONE"));
+        TimeUnit.MILLISECONDS.sleep(100);
         assertThat(check, is("ONE"));
         StateListener<String> unsubscribe = subscription.unsubscribe();
         state.perform(new MockAction(Result.SUCCESS, "TWO"));
+        TimeUnit.MILLISECONDS.sleep(100);
         assertThat(check, is("ONE"));
     }
 
