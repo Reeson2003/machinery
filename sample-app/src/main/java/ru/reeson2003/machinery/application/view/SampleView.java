@@ -11,10 +11,15 @@ import ru.reeson2003.machinery.application.presenter.SamplePresenterImpl;
 import java.io.IOException;
 
 public class SampleView
-        extends BaseView<SampleModel, SamplePresenter> {
+        extends BaseStatefulView<SampleModel, SamplePresenter> {
 
     public SampleView(WebSocketSession session) {
         super(session);
+    }
+
+    @Override
+    protected Class<SampleModel> getModelClass() {
+        return SampleModel.class;
     }
 
     @Override

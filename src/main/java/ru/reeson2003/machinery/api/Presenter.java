@@ -1,14 +1,11 @@
 package ru.reeson2003.machinery.api;
 
-public interface Presenter<M, V extends View, I, P, A extends Action<I, P>> {
+public interface Presenter<V extends View> {
 
-    void attach(V view);
+    void attachView(View view);
 
-    void detach();
+    V detachView();
 
     V getView();
 
-    State<M, A> getState();
-
-    Class<M> getModelClass();
 }
