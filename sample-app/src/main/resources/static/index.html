@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Client Page</title>
     <script type="text/javascript">
-        const ws = new WebSocket("ws://localhost:8080/ws");
+        const ws = new WebSocket("ws://" + window.location.hostname + ":8080/ws");
         ws.onopen = () => {
         };
         ws.onmessage = (evt) => {
