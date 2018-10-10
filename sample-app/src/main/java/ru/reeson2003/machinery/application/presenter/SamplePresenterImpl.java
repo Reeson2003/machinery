@@ -1,21 +1,15 @@
 package ru.reeson2003.machinery.application.presenter;
 
 import ru.reeson2003.machinery.api.State;
-import ru.reeson2003.machinery.api.View;
+import ru.reeson2003.machinery.api.StatefulView;
 import ru.reeson2003.machinery.application.model.SampleAction;
 import ru.reeson2003.machinery.application.model.SampleModel;
 import ru.reeson2003.machinery.application.model.SamplePayload;
-import ru.reeson2003.machinery.impl.BasePresenter;
+import ru.reeson2003.machinery.impl.BaseStatefulPresenter;
 
 public class SamplePresenterImpl
-        extends BasePresenter<SampleModel, View<SampleModel, SamplePresenter>, SampleAction.Result, SamplePayload, SampleAction>
+        extends BaseStatefulPresenter<SampleModel, StatefulView<SampleModel, SamplePresenter>, SampleAction>
         implements SamplePresenter {
-
-
-    @Override
-    public Class<SampleModel> getModelClass() {
-        return SampleModel.class;
-    }
 
     @Override
     public void setData(String data) {
@@ -29,8 +23,7 @@ public class SamplePresenterImpl
 
     @Override
     public void disconnect() {
-        State<SampleModel, SampleAction> state = getState();
-        detach();
+        State<SampleModel, SampleAction> state = detachState();
         state.perform(new SampleAction(SampleAction.Result.DISCONNECT, new SamplePayload("")));
     }
 

@@ -1,21 +1,21 @@
 package ru.reeson2003.machinery.application.view;
 
 import org.springframework.web.socket.WebSocketSession;
-import ru.reeson2003.machinery.api.Presenter;
-import ru.reeson2003.machinery.api.View;
+import ru.reeson2003.machinery.api.StatefulPresenter;
+import ru.reeson2003.machinery.api.StatefulView;
 import ru.reeson2003.machinery.application.service.ws.Connection;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-public abstract class BaseView<M, P extends Presenter>
-        implements View<M, P>, Connection {
+public abstract class BaseStatefulView<M, P extends StatefulPresenter<M, ?, ?>>
+        implements StatefulView<M, P>, Connection {
 
     private P presenter;
 
     private WebSocketSession session;
 
-    public BaseView(WebSocketSession session) {
+    public BaseStatefulView(WebSocketSession session) {
         this.session = session;
     }
 
@@ -23,12 +23,14 @@ public abstract class BaseView<M, P extends Presenter>
     @SuppressWarnings("unchecked")
     public void setup() {
         this.presenter = supplyPresenter();
-        this.presenter.attach(this);
+        this.presenter.attachView(this);
+        this.presenter.attachState(getModelClass());
     }
 
     @PreDestroy
     public void cleanup() {
-        this.presenter.detach();
+        this.presenter.detachView();
+        this.presenter.detachState();
         this.presenter = null;
     }
 
@@ -36,6 +38,8 @@ public abstract class BaseView<M, P extends Presenter>
     public P getPresenter() {
         return presenter;
     }
+
+    protected abstract Class<M> getModelClass();
 
     protected WebSocketSession getSession() {
         return session;

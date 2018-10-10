@@ -1,28 +1,24 @@
 package ru.reeson2003.machinery.impl;
 
-import ru.reeson2003.machinery.api.*;
+import ru.reeson2003.machinery.api.Presenter;
+import ru.reeson2003.machinery.api.View;
 
-public abstract class BasePresenter<M, V extends View<M, ?>, I, P, A extends Action<I, P>>
-        implements Presenter<M, V, I, P, A> {
-
-    private Subscription<M> mSubscription;
+public abstract class BasePresenter<V extends View<?>>
+        implements Presenter<V> {
 
     private V mView;
 
-    private State<M, A> mState;
-
     @Override
-    public void attach(V view) {
-        mView = view;
-        mState = CombinedState.getState(getModelClass());
-        mSubscription = mState.listen(view::onUpdate);
+    @SuppressWarnings("unchecked")
+    public void attachView(View view) {
+        mView = (V) view;
     }
 
     @Override
-    public void detach() {
-        mSubscription.unsubscribe();
+    public V detachView() {
+        V result = mView;
         mView = null;
-        mState = null;
+        return result;
     }
 
     @Override
@@ -30,8 +26,4 @@ public abstract class BasePresenter<M, V extends View<M, ?>, I, P, A extends Act
         return mView;
     }
 
-    @Override
-    public State<M, A> getState() {
-        return mState;
-    }
 }
